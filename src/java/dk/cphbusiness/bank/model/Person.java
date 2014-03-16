@@ -26,8 +26,8 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")})
 public class Person implements Serializable 
 {
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
-    private Employee employee;
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
+//    private Employee employee;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
     private Role role;
     private static final long serialVersionUID = 1L;
@@ -220,15 +220,15 @@ public class Person implements Serializable
         return "dk.cphbusiness.bank.model.Person[ cpr=" + cpr + " ]";
     }
 
-    public Employee getEmployee()
-    {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee)
-    {
-        this.employee = employee;
-    }
+//    public Employee getEmployee()
+//    {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee)
+//    {
+//        this.employee = employee;
+//    }
 
     public Role getRole()
     {
