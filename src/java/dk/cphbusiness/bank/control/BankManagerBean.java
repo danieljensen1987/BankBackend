@@ -7,7 +7,6 @@ import dk.cphbusiness.bank.contract.dto.AccountSummary;
 import dk.cphbusiness.bank.contract.dto.CustomerDetail;
 import dk.cphbusiness.bank.contract.dto.CustomerIdentifier;
 import dk.cphbusiness.bank.contract.dto.CustomerSummary;
-import dk.cphbusiness.bank.contract.dto.PersonSummary;
 import dk.cphbusiness.bank.contract.eto.CustomerBannedException;
 import dk.cphbusiness.bank.contract.eto.InsufficientFundsException;
 import dk.cphbusiness.bank.contract.eto.NoSuchAccountException;
@@ -38,7 +37,9 @@ public class BankManagerBean implements BankManager
     @Override
     public Collection<CustomerSummary> listCustomers()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = em.createNamedQuery("Person.findAll");
+        Collection<Person> persons = query.getResultList();
+        return createCustomerSummaries(persons);
     }
 
     @Override
@@ -92,11 +93,4 @@ public class BankManagerBean implements BankManager
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 
-    @Override
-    public Collection<PersonSummary> listPersons()
-    {
-        Query query = em.createNamedQuery("Person.findAll");
-        Collection<Person> persons = query.getResultList();
-        return createPersonSummaries(persons);
-    }
 }

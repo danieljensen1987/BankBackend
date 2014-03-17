@@ -1,21 +1,21 @@
 package dk.cphbusiness.bank.control;
 
-import dk.cphbusiness.bank.contract.dto.PersonSummary;
+import dk.cphbusiness.bank.contract.dto.CustomerSummary;
 import dk.cphbusiness.bank.model.Person;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class Assembler 
 {
-    public static PersonSummary createPersonSummary(Person person){
+    public static CustomerSummary createCustomerSummary(Person person){
         
-        return new PersonSummary(person.getCpr(), person.getFirstname(), person.getLastname(), person.getPhone());
+        return new CustomerSummary(person.getCpr(), person.getFirstname()+ " " + person.getLastname(),person.getStreet(), person.getPhone(), person.getEmail());
         
     }
     
-    public static Collection<PersonSummary> createPersonSummaries(Collection<Person> persons){
-        Collection<PersonSummary> summaries = new ArrayList<>();
-        for (Person person : persons) summaries.add(createPersonSummary(person));
+    public static Collection<CustomerSummary> createCustomerSummaries(Collection<Person> persons){
+        Collection<CustomerSummary> summaries = new ArrayList<>();
+        for (Person person : persons) summaries.add(createCustomerSummary(person));
         return summaries;
     }
 }
