@@ -32,7 +32,7 @@ public class BankManagerBean implements BankManager
     @Override
     public String sayHello(String name)
     {
-        return "hello" + name;
+        return "hello backend" + name;
     }
 
     @Override

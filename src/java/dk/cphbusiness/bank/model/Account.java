@@ -23,7 +23,7 @@ import javax.validation.constraints.Size;
 @Inheritance (strategy = InheritanceType.JOINED)
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
-public class Account implements Serializable 
+public abstract class Account implements Serializable 
 {
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,22 +32,24 @@ public class Account implements Serializable
     @Size(min = 1, max = 40)
     @Column(name = "ACC_NUMBER")
     private String accNumber;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 30)
-    @Column(name = "ACC_TYPE")
-    private String accType;
+
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "INTEREST")
     private BigDecimal interest;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "BALANCE")
     private BigDecimal balance;
-    @OneToMany(mappedBy = "account")
-    private Collection<Transfer> transferCollection;
+    
+    @OneToMany(mappedBy = "sourceAccount")
+    private Collection<Transfer> incomingTransfers;
+    
+    @OneToMany(mappedBy = "targetAccount")
+    private Collection<Transfer> outgoingTransfers;
+    
     @JoinColumn(name = "CPR", referencedColumnName = "CPR")
     @ManyToOne
     private Person person;
@@ -61,10 +63,9 @@ public class Account implements Serializable
         this.accNumber = accNumber;
     }
 
-    public Account(String accNumber, String accType, BigDecimal interest, BigDecimal balance)
+    public Account(String accNumber, BigDecimal interest, BigDecimal balance)
     {
         this.accNumber = accNumber;
-        this.accType = accType;
         this.interest = interest;
         this.balance = balance;
     }
@@ -77,16 +78,6 @@ public class Account implements Serializable
     public void setAccNumber(String accNumber)
     {
         this.accNumber = accNumber;
-    }
-
-    public String getAccType()
-    {
-        return accType;
-    }
-
-    public void setAccType(String accType)
-    {
-        this.accType = accType;
     }
 
     public BigDecimal getInterest()
@@ -109,14 +100,24 @@ public class Account implements Serializable
         this.balance = balance;
     }
 
-    public Collection<Transfer> getTransferCollection()
+    public Collection<Transfer> getIncomingTransfers()
     {
-        return transferCollection;
+        return incomingTransfers;
     }
 
-    public void setTransferCollection(Collection<Transfer> transferCollection)
+    public void setIncomingTransfers(Collection<Transfer> incomingTransfers)
     {
-        this.transferCollection = transferCollection;
+        this.incomingTransfers = incomingTransfers;
+    }
+
+    public Collection<Transfer> getOutgoingTransfers()
+    {
+        return outgoingTransfers;
+    }
+
+    public void setOutgoingTransfers(Collection<Transfer> outgoingTransfers)
+    {
+        this.outgoingTransfers = outgoingTransfers;
     }
 
     public Person getPerson()

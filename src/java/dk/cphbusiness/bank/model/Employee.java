@@ -21,6 +21,7 @@ public class Employee extends Person
     private static final long serialVersionUID = 1L;
     @Column(name = "SALARY")
     private BigDecimal salary;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "DATEOFEMPLOYMENT")

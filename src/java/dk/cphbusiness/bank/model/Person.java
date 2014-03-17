@@ -26,10 +26,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")})
 public class Person implements Serializable 
 {
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
-//    private Employee employee;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "person")
-    private Role role;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -37,40 +33,49 @@ public class Person implements Serializable
     @Size(min = 1, max = 11)
     @Column(name = "CPR")
     private String cpr;
+    
     @Size(max = 12)
     @Column(name = "TITLE")
     private String title;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "FIRSTNAME")
     private String firstname;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "LASTNAME")
     private String lastname;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
     @Column(name = "STREET")
     private String street;
+    
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
     @Column(name = "PHONE")
     private String phone;
+    
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 40)
     @Column(name = "EMAIL")
     private String email;
+    
     @Size(max = 40)
     @Column(name = "PASSWORD")
     private String password;
+    
     @JoinColumn(name = "POSTALCODE", referencedColumnName = "CODE")
     @ManyToOne
     private Postal postal;
+    
     @OneToMany(mappedBy = "person")
     private Collection<Account> accountCollection;
 
@@ -218,26 +223,6 @@ public class Person implements Serializable
     public String toString()
     {
         return "dk.cphbusiness.bank.model.Person[ cpr=" + cpr + " ]";
-    }
-
-//    public Employee getEmployee()
-//    {
-//        return employee;
-//    }
-//
-//    public void setEmployee(Employee employee)
-//    {
-//        this.employee = employee;
-//    }
-
-    public Role getRole()
-    {
-        return role;
-    }
-
-    public void setRole(Role role)
-    {
-        this.role = role;
     }
     
 }

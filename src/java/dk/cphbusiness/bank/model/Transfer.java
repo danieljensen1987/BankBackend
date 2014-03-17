@@ -30,9 +30,7 @@ public class Transfer implements Serializable
     @Size(min = 1, max = 20)
     @Column(name = "TRANSFER_ID")
     private String transferId;
-    @Size(max = 40)
-    @Column(name = "TARGET_ACC_NUMBER")
-    private String targetAccNumber;
+ 
     @Basic(optional = false)
     @NotNull
     @Column(name = "TRANSFER_DATE")
@@ -43,9 +41,14 @@ public class Transfer implements Serializable
     @NotNull
     @Column(name = "AMOUNT")
     private BigDecimal amount;
+    
     @JoinColumn(name = "SOURCE_ACC_NUMBER", referencedColumnName = "ACC_NUMBER")
     @ManyToOne
-    private Account account;
+    private Account sourceAccount;
+
+    @JoinColumn(name = "TARGET_ACC_NUMBER", referencedColumnName = "ACC_NUMBER")
+    @ManyToOne
+    private Account targetAccount;
 
     public Transfer()
     {
@@ -73,16 +76,6 @@ public class Transfer implements Serializable
         this.transferId = transferId;
     }
 
-    public String getTargetAccNumber()
-    {
-        return targetAccNumber;
-    }
-
-    public void setTargetAccNumber(String targetAccNumber)
-    {
-        this.targetAccNumber = targetAccNumber;
-    }
-
     public Date getTransferDate()
     {
         return transferDate;
@@ -103,14 +96,14 @@ public class Transfer implements Serializable
         this.amount = amount;
     }
 
-    public Account getAccount()
+    public Account getSourceAccount()
     {
-        return account;
+        return sourceAccount;
     }
 
-    public void setAccount(Account account)
+    public void setSourceAccount(Account sourceAccount)
     {
-        this.account = account;
+        this.sourceAccount = sourceAccount;
     }
 
     @Override
