@@ -20,3 +20,5 @@ values
 ('1111-4222');
 
 SELECT * FROM Employee;
+
+select * from Account where customer_cpr = '020202-2635';

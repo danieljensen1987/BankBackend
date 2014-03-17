@@ -1,6 +1,6 @@
 package dk.cphbusiness.bank.model;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -14,18 +14,26 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "ACCOUNT")
-@Inheritance (strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
-public abstract class Account implements Serializable 
+public abstract class Account implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
+
+    public static Collection<Account> list(Person customer)
+    {
+        return customer.getAccountCollection();
+        
+    }
     @Id
     @Basic(optional = false)
     @NotNull
@@ -38,18 +46,18 @@ public abstract class Account implements Serializable
     @NotNull
     @Column(name = "INTEREST")
     private BigDecimal interest;
-    
+
     @Basic(optional = false)
     @NotNull
     @Column(name = "BALANCE")
     private BigDecimal balance;
-    
+
     @OneToMany(mappedBy = "sourceAccount")
     private Collection<Transfer> incomingTransfers;
-    
+
     @OneToMany(mappedBy = "targetAccount")
     private Collection<Transfer> outgoingTransfers;
-    
+
     @JoinColumn(name = "CPR", referencedColumnName = "CPR")
     @ManyToOne
     private Person person;
@@ -157,5 +165,5 @@ public abstract class Account implements Serializable
     {
         return "dk.cphbusiness.bank.model.Account[ accNumber=" + accNumber + " ]";
     }
-    
+
 }

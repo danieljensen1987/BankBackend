@@ -20,14 +20,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import static dk.cphbusiness.bank.control.Assembler.*;
+import dk.cphbusiness.bank.model.Account;
 
 @Stateless
 public class BankManagerBean implements BankManager
 {
+
     @PersistenceContext(unitName = "BankBackendPU")
     private EntityManager em;
 
-    
     @Override
     public String sayHello(String name)
     {
@@ -45,13 +46,19 @@ public class BankManagerBean implements BankManager
     @Override
     public Collection<AccountSummary> listAccounts()
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Query query = em.createNamedQuery("Account.findAll");
+        Collection<Account> accounts = query.getResultList();
+        return createAccountSummaries(accounts);
     }
 
     @Override
     public Collection<AccountSummary> listCustomerAccounts(CustomerIdentifier customer)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxx" + customer.getCpr());
+        String cpr = customer.getCpr();
+        Query query = em.createNativeQuery("SELECT * FROM Account WHERE customer_cpr = " + cpr);
+        Collection<Account> accounts = query.getResultList();
+        return createAccountSummaries(accounts);
     }
 
     @Override
@@ -92,5 +99,4 @@ public class BankManagerBean implements BankManager
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-
 }
