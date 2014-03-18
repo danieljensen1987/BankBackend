@@ -21,6 +21,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import static dk.cphbusiness.bank.control.Assembler.*;
 import dk.cphbusiness.bank.model.Account;
+import dk.cphbusiness.bank.model.Transfer;
+import java.util.Date;
 
 @Stateless
 public class BankManagerBean implements BankManager
@@ -71,18 +73,24 @@ public class BankManagerBean implements BankManager
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public AccountDetail transferAmount(BigDecimal amount, AccountIdentifier source, AccountIdentifier target) throws NoSuchAccountException, TransferNotAcceptedException, InsufficientFundsException
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   @Override
+  public AccountDetail transferAmount(BigDecimal amount, AccountIdentifier source, AccountIdentifier target) throws NoSuchAccountException, TransferNotAcceptedException, InsufficientFundsException {
+      
+//    Account sourceAccount = em.find(Account.class, source.getNumber());
+//    Account targetAccount = em.find(Account.class, target.getNumber());
+//    String id = Transfer 
+//    new Transfer()
+//    return createAccountDetail(sourceAccount);
+      
+      return null;
     }
 
     @Override
     public AccountDetail showAccountHistory(AccountIdentifier identifier)
     {
-//        Account account = em.find(Account.class, identifier.getNumber());
-//        return createAccountDetail(account);
-        return null;
+        Account account = em.find(Account.class, identifier.getNumber());
+        return createAccountDetail(account);
+       
     }
 
     @Override

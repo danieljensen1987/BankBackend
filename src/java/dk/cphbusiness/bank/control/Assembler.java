@@ -51,28 +51,28 @@ public class Assembler
     return summaries;
     }
   
-//  public static TransferSummary createTransferSummary(Account account, Transfer transfer) {
-//    if (transfer.getSourceAccount() == account) 
-//        return new TransferSummary(
-//            transfer.getTransferDate(),
-//            transfer.getAmount().negate(),
-//            transfer.getTargetAccount().getAccNumber()
-//            );
-//    else 
-//        return new TransferSummary(
-//            transfer.getTransferDate(),
-//            transfer.getAmount(),
-//            transfer.getSourceAccount().getAccNumber()
-//            );
-//    }
-//  public static AccountDetail createAccountDetail(Account account) {
-//    List<Transfer> transfers = new ArrayList<>();
-//    transfers.addAll(account.getIncomingTransfers());
-//    transfers.addAll(account.getOutgoingTransfers());
-//    //Collections.sort(transfers);
-//    System.err.println("Transfers for #"+account.getAccNumber()+" "+transfers.size());
-//    Collection<TransferSummary> transferSummaries = new ArrayList<>();
-//    for (Transfer transfer : transfers) transferSummaries.add(createTransferSummary(account, transfer));
-//    return new CheckingAccountDetail(account.getAccNumber(), account.getInterest(), transferSummaries);
-//    }
+  public static TransferSummary createTransferSummary(Account account, Transfer transfer) {
+    if (transfer.getSourceAccount() == account) 
+        return new TransferSummary(
+            transfer.getTransferDate(),
+            transfer.getAmount().negate(),
+            transfer.getTargetAccount().getAccNumber()
+            );
+    else 
+        return new TransferSummary(
+            transfer.getTransferDate(),
+            transfer.getAmount(),
+            transfer.getSourceAccount().getAccNumber()
+            );
+    }
+  public static AccountDetail createAccountDetail(Account account) {
+    List<Transfer> transfers = new ArrayList<>();
+    transfers.addAll(account.getIncomingTransfers());
+    transfers.addAll(account.getOutgoingTransfers());
+    //Collections.sort(transfers);
+    System.err.println("Transfers for #"+account.getAccNumber()+" "+transfers.size());
+    Collection<TransferSummary> transferSummaries = new ArrayList<>();
+    for (Transfer transfer : transfers) transferSummaries.add(createTransferSummary(account, transfer));
+    return new CheckingAccountDetail(account.getAccNumber(), account.getInterest(), transferSummaries);
+    }
 }

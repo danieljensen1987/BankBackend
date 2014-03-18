@@ -1,3 +1,8 @@
+
+delete from Transfer;
+delete from CheckingAccount;
+delete from Account;
+delete from Employee;
 delete from Person;
 ---
 insert into Person(cpr, dtype, title, firstName, lastName, postalCode, street, phone, email, password)
@@ -13,14 +18,22 @@ values
 
 insert into Account (acc_number, customer_cpr, manager_cpr, dtype, interest, balance)
 values
-('1111-4222', '020202-2635', '030303-5644', 'CheckingAccount', 0.12, 0.00);
+('1111-4222', '020202-2635', '030303-5644', 'CheckingAccount', 0.12, 0.00),
+('1111-4223', '010101-2000', '030303-5644', 'CheckingAccount', 0.25, 100.00);
+
 
 insert into CheckingAccount (acc_number)
 values
-('1111-4222');
+('1111-4222'),
+('1111-4223');
 
-SELECT * FROM Employee;
+insert into Transfer (transfer_id, SOURCE_ACC_NUMBER, TARGET_ACC_NUMBER, TRANSFER_DATE, AMOUNT)
+values
+('1', '1111-4223', '1111-4222', '2014-03-18', 100.00);
 
-select * from Account where customer_cpr = '020202-2635';
 
-SELECT * FROM Account a WHERE customer_cpr = 
+--SELECT * FROM Employee;
+
+--select * from Account where customer_cpr = '020202-2635';
+
+--SELECT * FROM Account a WHERE customer_cpr = 
