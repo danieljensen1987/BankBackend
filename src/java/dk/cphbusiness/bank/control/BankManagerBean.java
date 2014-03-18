@@ -21,7 +21,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import static dk.cphbusiness.bank.control.Assembler.*;
 import dk.cphbusiness.bank.model.Account;
-import dk.cphbusiness.bank.model.Transfer;
 
 @Stateless
 public class BankManagerBean implements BankManager
@@ -63,7 +62,7 @@ public class BankManagerBean implements BankManager
 //                = em.createNamedQuery("Account.findByCustomerCpr")
 //                .setParameter("cpr", customerIdentifier.getCpr())
 //                .getResultList();
-        return createAccountSummaries(accounts);
+       return createAccountSummaries(accounts);
     }
 
     @Override
@@ -81,8 +80,9 @@ public class BankManagerBean implements BankManager
     @Override
     public AccountDetail showAccountHistory(AccountIdentifier identifier)
     {
-        Account account = em.find(Account.class, identifier.getNumber());
-        return createAccountDetail(account);
+//        Account account = em.find(Account.class, identifier.getNumber());
+//        return createAccountDetail(account);
+        return null;
     }
 
     @Override

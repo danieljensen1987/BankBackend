@@ -8,15 +8,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CHECKINGACCOUNT")
 @NamedQueries({
-    @NamedQuery(name = "Checkingaccount.findAll", query = "SELECT c FROM Checkingaccount c")})
-public class Checkingaccount extends Account 
+    @NamedQuery(name = "CheckingAccount.findAll", query = "SELECT c FROM CheckingAccount c")})
+public class CheckingAccount extends Account 
 {
     private static final long serialVersionUID = 1L;
-    public Checkingaccount()
+    public CheckingAccount()
     {
     }
 
-    public Checkingaccount(String accNumber)
+    public CheckingAccount(String accNumber)
     {
         super(accNumber);
     }

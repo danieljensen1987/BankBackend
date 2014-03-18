@@ -12,24 +12,24 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "TIMEDEPOSITACCOUNT")
 @NamedQueries({
-    @NamedQuery(name = "Timedepositaccount.findAll", query = "SELECT t FROM Timedepositaccount t")})
-public class Timedepositaccount extends Account 
+    @NamedQuery(name = "TimeDepositAccount.findAll", query = "SELECT t FROM TimeDepositAccount t")})
+public class TimeDepositAccount extends Account 
 {
     private static final long serialVersionUID = 1L;
     @Column(name = "RELEASEDATE")
     @Temporal(TemporalType.DATE)
     private Date releasedate;    
 
-    public Timedepositaccount()
+    public TimeDepositAccount()
     {
     }
 
-    public Timedepositaccount(String accNumber)
+    public TimeDepositAccount(String accNumber)
     {
         super(accNumber);
     }
 
-    public Timedepositaccount(String accNumber, Date releasedate)
+    public TimeDepositAccount(String accNumber, Date releasedate)
     {
         super(accNumber);
         this.releasedate = releasedate;
