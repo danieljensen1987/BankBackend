@@ -59,6 +59,15 @@ public class Transfer implements Serializable
         this.transferId = transferId;
     }
 
+    public Transfer(String transferId, BigDecimal amount, Account sourceAccount, Account targetAccount) {
+        this.transferId = transferId;
+        this.amount = amount;
+        this.sourceAccount = sourceAccount;
+        this.targetAccount = targetAccount;
+    }
+    
+    
+
     public Transfer(String transferId, Date transferDate, BigDecimal amount)
     {
         this.transferId = transferId;
