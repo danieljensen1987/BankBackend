@@ -106,6 +106,17 @@ public class Transfer implements Serializable
         this.sourceAccount = sourceAccount;
     }
 
+    public Account getTargetAccount()
+    {
+        return targetAccount;
+    }
+
+    public void setTargetAccount(Account targetAccount)
+    {
+        this.targetAccount = targetAccount;
+    }
+    
+    
     @Override
     public int hashCode()
     {

@@ -21,6 +21,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import static dk.cphbusiness.bank.control.Assembler.*;
 import dk.cphbusiness.bank.model.Account;
+import dk.cphbusiness.bank.model.Transfer;
 
 @Stateless
 public class BankManagerBean implements BankManager
@@ -78,9 +79,10 @@ public class BankManagerBean implements BankManager
     }
 
     @Override
-    public AccountDetail showAccountHistory(AccountIdentifier account)
+    public AccountDetail showAccountHistory(AccountIdentifier identifier)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Account account = em.find(Account.class, identifier.getNumber());
+        return createAccountDetail(account);
     }
 
     @Override
