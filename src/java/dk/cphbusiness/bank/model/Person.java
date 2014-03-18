@@ -1,6 +1,6 @@
 package dk.cphbusiness.bank.model;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -22,13 +22,14 @@ import javax.validation.constraints.Size;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "PERSON")
-@NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
-//        ,
-//    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
-})
-public class Person implements Serializable 
+@NamedQueries(
+        {
+            @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
+            @NamedQuery(name = "Person.findByCpr", query = "SELECT p FROM Person p WHERE p.cpr = :cpr")
+        })
+public class Person implements Serializable
 {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -36,49 +37,49 @@ public class Person implements Serializable
     @Size(min = 1, max = 11)
     @Column(name = "CPR")
     private String cpr;
-    
+
     @Size(max = 12)
     @Column(name = "TITLE")
     private String title;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "FIRSTNAME")
     private String firstname;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
     @Column(name = "LASTNAME")
     private String lastname;
-    
+
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 60)
     @Column(name = "STREET")
     private String street;
-    
+
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 11)
     @Column(name = "PHONE")
     private String phone;
-    
+
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 40)
     @Column(name = "EMAIL")
     private String email;
-    
+
     @Size(max = 40)
     @Column(name = "PASSWORD")
     private String password;
-    
+
     @JoinColumn(name = "POSTALCODE", referencedColumnName = "CODE")
     @ManyToOne
     private Postal postal;
-    
+
     @OneToMany(mappedBy = "person")
     private Collection<Account> accountCollection;
 
@@ -227,5 +228,5 @@ public class Person implements Serializable
     {
         return "dk.cphbusiness.bank.model.Person[ cpr=" + cpr + " ]";
     }
-    
+
 }

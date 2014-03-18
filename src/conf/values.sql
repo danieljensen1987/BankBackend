@@ -22,3 +22,5 @@ values
 SELECT * FROM Employee;
 
 select * from Account where customer_cpr = '020202-2635';
+
+SELECT * FROM Account a WHERE customer_cpr = 

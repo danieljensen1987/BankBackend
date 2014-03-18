@@ -22,8 +22,11 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "ACCOUNT")
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")})
+@NamedQueries(
+        {
+            @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
+            @NamedQuery(name = "Account.findByCustomerCpr", query = "SELECT a FROM Account a WHERE a.person.cpr = :customer_cpr")
+        })
 public abstract class Account implements Serializable
 {
 
@@ -32,7 +35,7 @@ public abstract class Account implements Serializable
     public static Collection<Account> list(Person customer)
     {
         return customer.getAccountCollection();
-        
+
     }
     @Id
     @Basic(optional = false)
@@ -58,7 +61,7 @@ public abstract class Account implements Serializable
     @OneToMany(mappedBy = "targetAccount")
     private Collection<Transfer> outgoingTransfers;
 
-    @JoinColumn(name = "CPR", referencedColumnName = "CPR")
+    @JoinColumn(name = "CUSTOMER_CPR", referencedColumnName = "CPR")
     @ManyToOne
     private Person person;
 

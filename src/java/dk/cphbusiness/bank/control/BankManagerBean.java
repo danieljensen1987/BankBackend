@@ -52,12 +52,16 @@ public class BankManagerBean implements BankManager
     }
 
     @Override
-    public Collection<AccountSummary> listCustomerAccounts(CustomerIdentifier customer)
+    public Collection<AccountSummary> listCustomerAccounts(CustomerIdentifier customerIdentifier)
     {
-        System.out.println("xxxxxxxxxxxxxxxxxxxxxx" + customer.getCpr());
-        String cpr = customer.getCpr();
-        Query query = em.createNativeQuery("SELECT * FROM Account WHERE customer_cpr = " + customer.getCpr() );
-        Collection<Account> accounts = query.getResultList();
+        System.out.println("xxxxxxxxxxxxxxxxxxxxxx" + customerIdentifier.getCpr());
+        Person customer = em.find(Person.class, customerIdentifier.getCpr());
+        Collection<Account> accounts = customer.getAccountCollection();
+
+//        Collection<Account> accounts2
+//                = em.createNamedQuery("Account.findByCustomerCpr")
+//                .setParameter("cpr", customerIdentifier.getCpr())
+//                .getResultList();
         return createAccountSummaries(accounts);
     }
 

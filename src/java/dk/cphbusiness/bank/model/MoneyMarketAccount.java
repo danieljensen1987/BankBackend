@@ -8,10 +8,10 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "MONNEYMARKETACCOUNT")
+@Table(name = "MONEYMARKETACCOUNT")
 @NamedQueries({
-    @NamedQuery(name = "Monneymarketaccount.findAll", query = "SELECT m FROM Monneymarketaccount m")})
-public class Monneymarketaccount extends Account 
+    @NamedQuery(name = "MoneyMarketAccount.findAll", query = "SELECT m FROM MoneyMarketAccount m")})
+public class MoneyMarketAccount extends Account 
 {
     private static final long serialVersionUID = 1L;
     
@@ -20,16 +20,16 @@ public class Monneymarketaccount extends Account
     
     
 
-    public Monneymarketaccount()
+    public MoneyMarketAccount()
     {
     }
 
-    public Monneymarketaccount(String accNumber)
+    public MoneyMarketAccount(String accNumber)
     {
         super(accNumber);
     }
 
-    public Monneymarketaccount(String accNumber, BigDecimal minimumbalance)
+    public MoneyMarketAccount(String accNumber, BigDecimal minimumbalance)
     {
         super(accNumber);
         this.minimumbalance = minimumbalance;
