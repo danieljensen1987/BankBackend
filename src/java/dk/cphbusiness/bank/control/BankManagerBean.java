@@ -56,7 +56,7 @@ public class BankManagerBean implements BankManager
     {
         System.out.println("xxxxxxxxxxxxxxxxxxxxxx" + customer.getCpr());
         String cpr = customer.getCpr();
-        Query query = em.createNativeQuery("SELECT * FROM Account WHERE customer_cpr = " + cpr);
+        Query query = em.createNativeQuery("SELECT * FROM Account WHERE customer_cpr = " + customer.getCpr() );
         Collection<Account> accounts = query.getResultList();
         return createAccountSummaries(accounts);
     }

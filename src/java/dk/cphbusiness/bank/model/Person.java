@@ -23,7 +23,10 @@ import javax.validation.constraints.Size;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "PERSON")
 @NamedQueries({
-    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")})
+    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+//        ,
+//    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p")
+})
 public class Person implements Serializable 
 {
     private static final long serialVersionUID = 1L;
