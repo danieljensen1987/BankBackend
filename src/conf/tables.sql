@@ -7,6 +7,12 @@ drop table Account;
 drop table Employee;
 drop table Person;
 drop table Postal;
+--drop sequence--
+drop sequence acount_number_seq restrict;
+drop sequence transfer_id_seq restrict;
+-----------------------------------
+create sequence account_number_seq as int start with 1000 increment by 1;
+create sequence transaction_id_seq as int start with 1000 increment by 1;
 
 create table Postal(
 code int primary key,
