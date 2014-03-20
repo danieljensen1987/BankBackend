@@ -14,7 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -22,6 +21,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "ACCOUNT")
 @Inheritance(strategy = InheritanceType.JOINED)
+//@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.INTEGER)
 @NamedQueries(
         {
             @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a"),
