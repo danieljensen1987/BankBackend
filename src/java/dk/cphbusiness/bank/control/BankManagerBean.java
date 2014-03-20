@@ -23,6 +23,7 @@ import javax.persistence.Query;
 import static dk.cphbusiness.bank.control.Assembler.*;
 import dk.cphbusiness.bank.model.Account;
 import dk.cphbusiness.bank.model.CheckingAccount;
+import dk.cphbusiness.bank.model.Postal;
 import dk.cphbusiness.bank.model.Transfer;
 import java.util.Date;
 
@@ -101,7 +102,17 @@ public class BankManagerBean implements BankManager
     @Override
     public CustomerDetail saveCustomer(CustomerDetail customer)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(em.find(Person.class, customer.getCpr()) == null){
+        Person person = new Person(customer.getCpr(),
+        customer.getFirstName(),customer.getLastName(),customer.getStreet(),customer.getPhone());
+        person.setTitle(customer.getTitle());
+        person.setPostal(new Postal(Integer.parseInt(customer.getPostalCode()),customer.getPostalDistrict()));
+        person.setEmail(customer.getEmail());
+        em.persist(person);
+        return createCustomerDetail(person);
+        }else {
+        return customer; 
+        }
     }
 
     @Override
@@ -122,7 +133,8 @@ public class BankManagerBean implements BankManager
             throw new NoSuchCustomerException(ci);
         }
         if (ad instanceof CheckingAccountDetail) {
-            CheckingAccount ca = createCheckingAccountEntity(null);
+            CheckingAccount ca = createCheckingAccountEntity((CheckingAccountDetail)ad);
+            em.persist(ca);
             return createAccountDetail(ca);
         }
         throw new RuntimeException("Unknown Account type");

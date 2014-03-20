@@ -9,6 +9,7 @@ import dk.cphbusiness.bank.contract.dto.TransferSummary;
 import dk.cphbusiness.bank.model.Account;
 import dk.cphbusiness.bank.model.CheckingAccount;
 import dk.cphbusiness.bank.model.Person;
+import dk.cphbusiness.bank.model.Postal;
 import dk.cphbusiness.bank.model.Transfer;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -89,6 +90,7 @@ public class Assembler
         for (Transfer transfer : transfers) {
             transferSummaries.add(createTransferSummary(account, transfer));
         }
+        
         return new CheckingAccountDetail(account.getAccNumber(), account.getInterest(), transferSummaries);
     }
     
@@ -106,16 +108,6 @@ public class Assembler
         );
     }
     
-    public static Person createCustomerEntity(CustomerDetail detail) {
-    return new Person(
-        detail.getCpr(),
-        detail.getFirstName(),
-        detail.getLastName(),
-        detail.getStreet(),
-        detail.getPhone()
-        );
-    }
-  
   public static CheckingAccount createCheckingAccountEntity(CheckingAccountDetail detail) {
     return new CheckingAccount(detail.getType());
     }
