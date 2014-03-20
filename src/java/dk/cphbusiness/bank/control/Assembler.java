@@ -90,7 +90,6 @@ public class Assembler
         for (Transfer transfer : transfers) {
             transferSummaries.add(createTransferSummary(account, transfer));
         }
-        
         return new CheckingAccountDetail(account.getAccNumber(), account.getInterest(), transferSummaries);
     }
     
