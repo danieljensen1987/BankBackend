@@ -46,8 +46,7 @@ public class Assembler
         return new AccountSummary(
                 account.getAccNumber(),
                 "Checking Account",
-                account.getBalance()
-        );
+                account.getBalance());
     }
 
     public static Collection<AccountSummary> createAccountSummaries(Collection<Account> accounts)
@@ -107,6 +106,16 @@ public class Assembler
         );
     }
     
+    public static Person createCustomerEntity(CustomerDetail detail) {
+    return new Person(
+        detail.getCpr(),
+        detail.getFirstName(),
+        detail.getLastName(),
+        detail.getStreet(),
+        detail.getPhone()
+        );
+    }
+
   public static CheckingAccount createCheckingAccountEntity(CheckingAccountDetail detail) {
     return new CheckingAccount(detail.getType());
     }
