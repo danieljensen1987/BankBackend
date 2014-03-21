@@ -103,17 +103,28 @@ public class BankManagerBean implements BankManager
     @Override
     public CustomerDetail saveCustomer(CustomerDetail customer)
     {
+        CustomerDetail cd = null;
         if(em.find(Person.class, customer.getCpr()) == null){
-        Person person = new Person(customer.getCpr(),
+        Person p = new Person(customer.getCpr(),
         customer.getFirstName(),customer.getLastName(),customer.getStreet(),customer.getPhone());
-        person.setTitle(customer.getTitle());
-        person.setPostal(new Postal(Integer.parseInt(customer.getPostalCode()),customer.getPostalDistrict()));
-        person.setEmail(customer.getEmail());
-        em.persist(person);
-        return createCustomerDetail(person);
-        }else {
-        return customer; 
+        p.setTitle(customer.getTitle());
+        p.setPostal(new Postal(Integer.parseInt(customer.getPostalCode()),customer.getPostalDistrict()));
+        p.setEmail(customer.getEmail());
+        em.persist(p);
+        cd = createCustomerDetail(p);
+        }if(em.find(Person.class, customer.getCpr()) != null){
+            Person p = em.find(Person.class, customer.getCpr());
+            p.setTitle(customer.getTitle());
+            p.setFirstname(customer.getFirstName());
+            p.setLastname(customer.getLastName());
+            p.setStreet(customer.getStreet());
+            p.setPhone(customer.getPhone());
+            p.setPostal(new Postal(Integer.parseInt(customer.getPostalCode()),customer.getPostalDistrict()));
+            p.setEmail(customer.getEmail());
+            em.persist(p);
+            cd = createCustomerDetail(p); 
         }
+        return cd;
     }
 
     @Override

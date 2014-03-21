@@ -20,7 +20,7 @@ district varchar(40) not null
 );
 
 create table Person(
-cpr varchar(11) primary key,
+cpr varchar(11) Unique primary key,
 dtype varchar(20) not null,
 title varchar(12),
 firstName varchar(40) not null,
