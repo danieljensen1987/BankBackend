@@ -107,13 +107,16 @@ public class Assembler
     }
     
     public static Person createCustomerEntity(CustomerDetail detail) {
-    return new Person(
+    Person p = new Person(
         detail.getCpr(),
         detail.getFirstName(),
         detail.getLastName(),
         detail.getStreet(),
         detail.getPhone()
         );
+    p.setTitle(detail.getTitle());
+    
+    return p;
     }
 
   public static CheckingAccount createCheckingAccountEntity(CheckingAccountDetail detail) {
