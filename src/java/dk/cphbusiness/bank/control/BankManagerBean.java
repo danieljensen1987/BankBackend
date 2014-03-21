@@ -147,6 +147,8 @@ public class BankManagerBean implements BankManager
         if (ad instanceof CheckingAccountDetail) {
             CheckingAccount ca = createCheckingAccountEntity((CheckingAccountDetail)ad);
             em.persist(ca);
+            customer.getAccountCollection().add(ca);
+            em.persist(customer);
             return createAccountDetail(ca);
         }
         throw new RuntimeException("Unknown Account type");
