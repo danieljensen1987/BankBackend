@@ -8,7 +8,7 @@ drop table Employee;
 drop table Person;
 drop table Postal;
 --drop sequence--
-drop sequence acount_number_seq restrict;
+drop sequence account_number_seq restrict;
 drop sequence transfer_id_seq restrict;
 -----------------------------------
 create sequence account_number_seq as int start with 1000 increment by 1;
@@ -20,7 +20,7 @@ district varchar(40) not null
 );
 
 create table Person(
-cpr varchar(11) Unique primary key,
+cpr varchar(11) primary key,
 dtype varchar(20) not null,
 title varchar(12),
 firstName varchar(40) not null,
@@ -43,7 +43,8 @@ dateOfEmployment date not null
 --name varchar (30));
 
 create table Account(
-acc_number varchar(40) primary key,
+--acc_number varchar(40) primary key,--
+acc_number = '4711-' || char(next value for account_number_seq) primary key,
 customer_cpr varchar(11) references Person(cpr),
 manager_cpr varchar(11) references Employee(cpr),
 dtype varchar(30) not null,

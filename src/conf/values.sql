@@ -18,8 +18,9 @@ values
 
 insert into Account (acc_number, customer_cpr, manager_cpr, dtype, interest, balance)
 values
-('1111-4222', '020202-2635', '030303-5644', 'CheckingAccount', 0.12, 0.00),
-('1111-4223', '010101-2000', '030303-5644', 'CheckingAccount', 0.25, 100.00);
+('4711-4222','020202-2635', '030303-5644', 'CheckingAccount', 0.12, 0.00),
+('4711-4223', '010101-2000', '030303-5644', 'CheckingAccount', 0.25, 100.00),
+('4711-'|| char(next value for account_number_seq) , '010101-2000', '030303-5644', 'CheckingAccount', 0.25, 100.00);
 
 
 insert into CheckingAccount (acc_number)
