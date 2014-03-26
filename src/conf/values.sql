@@ -25,12 +25,12 @@ values
 
 insert into CheckingAccount (acc_number)
 values
-('1111-4222'),
-('1111-4223');
+('4711-4222'),
+('4711-4223');
 
 insert into Transfer (transfer_id, SOURCE_ACC_NUMBER, TARGET_ACC_NUMBER, TRANSFER_DATE, AMOUNT)
 values
-('1', '1111-4223', '1111-4222', '2014-03-18', 100.00);
+('1001', '4711-4223', '4711-4222', '2014-03-18', 100.00);
 
 
 --SELECT * FROM Employee;

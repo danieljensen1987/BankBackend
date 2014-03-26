@@ -12,7 +12,7 @@ drop sequence account_number_seq restrict;
 drop sequence transfer_id_seq restrict;
 -----------------------------------
 create sequence account_number_seq as int start with 1000 increment by 1;
-create sequence transaction_id_seq as int start with 1000 increment by 1;
+create sequence transfer_id_seq as int start with 1000 increment by 1;
 
 create table Postal(
 code int primary key,
@@ -43,8 +43,8 @@ dateOfEmployment date not null
 --name varchar (30));
 
 create table Account(
---acc_number varchar(40) primary key,--
-acc_number = '4711-' || char(next value for account_number_seq) primary key,
+acc_number varchar(40) primary key,
+--acc_number = '4711-' || char(next value for account_number_seq) primary key,--
 customer_cpr varchar(11) references Person(cpr),
 manager_cpr varchar(11) references Employee(cpr),
 dtype varchar(30) not null,
