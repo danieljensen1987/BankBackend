@@ -79,16 +79,16 @@ public class BankManagerBean implements BankManager
     public AccountDetail transferAmount(BigDecimal amount, AccountIdentifier source, AccountIdentifier target) throws NoSuchAccountException, TransferNotAcceptedException, InsufficientFundsException
     {
 
-    int transferId = 1000;
-    Account sourceAccount = em.find(Account.class, source.getNumber());
-    Account targetAccount = em.find(Account.class, target.getNumber());
-    sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
-    targetAccount.setBalance(targetAccount.getBalance().add(amount));
-    Transfer t = new Transfer(String.valueOf(transferId), amount.negate(), sourceAccount, targetAccount);
-    t.setTransferDate(new Date());
-    transferId++;
-    em.persist(t);
-    return createAccountDetail(sourceAccount);
+        int transferId = 1000;
+        Account sourceAccount = em.find(Account.class, source.getNumber());
+        Account targetAccount = em.find(Account.class, target.getNumber());
+        sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
+        targetAccount.setBalance(targetAccount.getBalance().add(amount));
+        Transfer t = new Transfer(String.valueOf(transferId), amount.negate(), sourceAccount, targetAccount);
+        t.setTransferDate(new Date());
+        transferId++;
+        em.persist(t);
+        return createAccountDetail(sourceAccount);
     }
 
     @Override
@@ -104,25 +104,26 @@ public class BankManagerBean implements BankManager
     public CustomerDetail saveCustomer(CustomerDetail customer)
     {
         CustomerDetail cd = null;
-        if(em.find(Person.class, customer.getCpr()) == null){
-        Person p = new Person(customer.getCpr(),
-        customer.getFirstName(),customer.getLastName(),customer.getStreet(),customer.getPhone());
-        p.setTitle(customer.getTitle());
-        p.setPostal(new Postal(Integer.parseInt(customer.getPostalCode()),customer.getPostalDistrict()));
-        p.setEmail(customer.getEmail());
-        em.persist(p);
-        cd = createCustomerDetail(p);
-        }if(em.find(Person.class, customer.getCpr()) != null){
+        if (em.find(Person.class, customer.getCpr()) == null) {
+            Person p = new Person(customer.getCpr(),
+                    customer.getFirstName(), customer.getLastName(), customer.getStreet(), customer.getPhone());
+            p.setTitle(customer.getTitle());
+            p.setPostal(new Postal(Integer.parseInt(customer.getPostalCode()), customer.getPostalDistrict()));
+            p.setEmail(customer.getEmail());
+            em.persist(p);
+            cd = createCustomerDetail(p);
+        }
+        if (em.find(Person.class, customer.getCpr()) != null) {
             Person p = em.find(Person.class, customer.getCpr());
             p.setTitle(customer.getTitle());
             p.setFirstname(customer.getFirstName());
             p.setLastname(customer.getLastName());
             p.setStreet(customer.getStreet());
             p.setPhone(customer.getPhone());
-            p.setPostal(new Postal(Integer.parseInt(customer.getPostalCode()),customer.getPostalDistrict()));
+            p.setPostal(new Postal(Integer.parseInt(customer.getPostalCode()), customer.getPostalDistrict()));
             p.setEmail(customer.getEmail());
             em.persist(p);
-            cd = createCustomerDetail(p); 
+            cd = createCustomerDetail(p);
         }
         return cd;
     }
@@ -145,7 +146,7 @@ public class BankManagerBean implements BankManager
             throw new NoSuchCustomerException(ci);
         }
         if (ad instanceof CheckingAccountDetail) {
-            CheckingAccount ca = createCheckingAccountEntity((CheckingAccountDetail)ad);
+            CheckingAccount ca = createCheckingAccountEntity((CheckingAccountDetail) ad);
             em.persist(ca);
             customer.getAccountCollection().add(ca);
             em.persist(customer);
@@ -156,4 +157,15 @@ public class BankManagerBean implements BankManager
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
+    @Override
+    public boolean doesUserExist(CustomerIdentifier ci)
+    {
+        boolean res = false;
+        Person customer = em.find(Person.class, ci.getCpr());
+        if (customer == null) {
+            res = true;
+            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+        return res;
+    }
 }
