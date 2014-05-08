@@ -13,7 +13,6 @@ import dk.cphbusiness.bank.contract.eto.InsufficientFundsException;
 import dk.cphbusiness.bank.contract.eto.NoSuchAccountException;
 import dk.cphbusiness.bank.contract.eto.NoSuchCustomerException;
 import dk.cphbusiness.bank.contract.eto.TransferNotAcceptedException;
-import dk.cphbusiness.bank.contract.extended.BankManagerExtended;
 import dk.cphbusiness.bank.model.Person;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -171,4 +170,6 @@ public class BankManagerBean implements BankManager
         }
         return res;
     }
+
+ 
 }
