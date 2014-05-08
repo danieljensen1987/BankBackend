@@ -1,6 +1,7 @@
 package dk.cphbusiness.bank.control;
 
-import dk.cphbusiness.bank.contract.BankManager;
+//import dk.cphbusiness.bank.contract.BankManager;
+import dk.cphbusiness.bank.contract.extended.BankManager;
 import dk.cphbusiness.bank.contract.dto.AccountDetail;
 import dk.cphbusiness.bank.contract.dto.AccountIdentifier;
 import dk.cphbusiness.bank.contract.dto.AccountSummary;
@@ -169,6 +170,11 @@ public class BankManagerBean implements BankManager
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
         return res;
+    }
+
+    @Override
+    public CustomerDetail saveEmployee(CustomerDetail customer) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
  
