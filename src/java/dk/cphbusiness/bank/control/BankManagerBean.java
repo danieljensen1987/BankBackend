@@ -13,6 +13,7 @@ import dk.cphbusiness.bank.contract.eto.InsufficientFundsException;
 import dk.cphbusiness.bank.contract.eto.NoSuchAccountException;
 import dk.cphbusiness.bank.contract.eto.NoSuchCustomerException;
 import dk.cphbusiness.bank.contract.eto.TransferNotAcceptedException;
+import dk.cphbusiness.bank.contract.extended.BankManagerExtended;
 import dk.cphbusiness.bank.model.Person;
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -79,7 +80,7 @@ public class BankManagerBean implements BankManager
     public AccountDetail transferAmount(BigDecimal amount, AccountIdentifier source, AccountIdentifier target) throws NoSuchAccountException, TransferNotAcceptedException, InsufficientFundsException
     {
 
-        int transferId = 1000;
+        int transferId = 1002;
         Account sourceAccount = em.find(Account.class, source.getNumber());
         Account targetAccount = em.find(Account.class, target.getNumber());
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
@@ -90,6 +91,7 @@ public class BankManagerBean implements BankManager
         em.persist(t);
         return createAccountDetail(sourceAccount);
     }
+    
 
     @Override
     public AccountDetail showAccountHistory(AccountIdentifier identifier)
@@ -147,6 +149,7 @@ public class BankManagerBean implements BankManager
         }
         if (ad instanceof CheckingAccountDetail) {
             CheckingAccount ca = createCheckingAccountEntity((CheckingAccountDetail) ad);
+            System.out.println("blab albabl: " + ca);
             em.persist(ca);
             customer.getAccountCollection().add(ca);
             em.persist(customer);

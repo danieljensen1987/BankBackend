@@ -81,6 +81,7 @@ public class Assembler
     public static AccountDetail createAccountDetail(Account account)
     {
         List<Transfer> transfers = new ArrayList<>();
+        System.out.println("gsdlkgmsldkm: " + account.getIncomingTransfers());
         transfers.addAll(account.getIncomingTransfers());
         transfers.addAll(account.getOutgoingTransfers());
         //Collections.sort(transfers);

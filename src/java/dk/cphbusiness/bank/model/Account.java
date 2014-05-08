@@ -2,6 +2,7 @@ package dk.cphbusiness.bank.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -61,10 +62,10 @@ public abstract class Account implements Serializable
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "sourceAccount")
-    private Collection<Transfer> incomingTransfers;
+    private Collection<Transfer> incomingTransfers = new ArrayList();
 
     @OneToMany(mappedBy = "targetAccount")
-    private Collection<Transfer> outgoingTransfers;
+    private Collection<Transfer> outgoingTransfers = new ArrayList();
 
     @JoinColumn(name = "CUSTOMER_CPR", referencedColumnName = "CPR")
     @ManyToOne
