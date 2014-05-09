@@ -1,7 +1,7 @@
 package dk.cphbusiness.bank.control;
 
-//import dk.cphbusiness.bank.contract.BankManager;
-import dk.cphbusiness.bank.contract.extended.BankManager;
+import dk.cphbusiness.bank.contract.BankManager;
+//import dk.cphbusiness.bank.contract.extended.BankManager;
 import dk.cphbusiness.bank.contract.dto.AccountDetail;
 import dk.cphbusiness.bank.contract.dto.AccountIdentifier;
 import dk.cphbusiness.bank.contract.dto.AccountSummary;
@@ -80,7 +80,7 @@ public class BankManagerBean implements BankManager
     public AccountDetail transferAmount(BigDecimal amount, AccountIdentifier source, AccountIdentifier target) throws NoSuchAccountException, TransferNotAcceptedException, InsufficientFundsException
     {
 
-        int transferId = 1002;
+        int transferId = 1007;
         Account sourceAccount = em.find(Account.class, source.getNumber());
         Account targetAccount = em.find(Account.class, target.getNumber());
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
@@ -89,6 +89,7 @@ public class BankManagerBean implements BankManager
         t.setTransferDate(new Date());
         transferId++;
         em.persist(t);
+        System.out.println("TRANSFER");
         return createAccountDetail(sourceAccount);
     }
     
@@ -160,22 +161,22 @@ public class BankManagerBean implements BankManager
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    @Override
-    public boolean doesUserExist(CustomerIdentifier ci)
-    {
-        boolean res = false;
-        Person customer = em.find(Person.class, ci.getCpr());
-        if (customer == null) {
-            res = true;
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-        return res;
-    }
-
-    @Override
-    public CustomerDetail saveEmployee(CustomerDetail customer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public boolean doesUserExist(CustomerIdentifier ci)
+//    {
+//        boolean res = false;
+//        Person customer = em.find(Person.class, ci.getCpr());
+//        if (customer == null) {
+//            res = true;
+//            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        }
+//        return res;
+//    }
+//
+//    @Override
+//    public CustomerDetail saveEmployee(CustomerDetail customer) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
 
  
 }
