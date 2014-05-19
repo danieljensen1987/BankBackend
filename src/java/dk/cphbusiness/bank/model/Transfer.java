@@ -22,7 +22,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "TRANSFER")
-@SequenceGenerator(name = "TRASFERSEQ", sequenceName = "transaction_id_seq")
+@SequenceGenerator(name = "TRANSFERSEQ", sequenceName = "transfer_id_seq")
 @NamedQueries({
     @NamedQuery(name = "Transfer.findAll", query = "SELECT t FROM Transfer t")})
 
@@ -63,6 +63,13 @@ public class Transfer implements Serializable
     public Transfer(String transferId)
     {
         this.transferId = transferId;
+    }
+    
+     public Transfer(BigDecimal amount, Account sourceAccount, Account targetAccount) {
+        
+        this.amount = amount;
+        this.sourceAccount = sourceAccount;
+        this.targetAccount = targetAccount;
     }
 
     public Transfer(String transferId, BigDecimal amount, Account sourceAccount, Account targetAccount) {

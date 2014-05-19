@@ -80,14 +80,14 @@ public class BankManagerBean implements BankManager
     public AccountDetail transferAmount(BigDecimal amount, AccountIdentifier source, AccountIdentifier target) throws NoSuchAccountException, TransferNotAcceptedException, InsufficientFundsException
     {
 
-        int transferId = 1007;
+        //int transferId;
         Account sourceAccount = em.find(Account.class, source.getNumber());
         Account targetAccount = em.find(Account.class, target.getNumber());
         sourceAccount.setBalance(sourceAccount.getBalance().subtract(amount));
         targetAccount.setBalance(targetAccount.getBalance().add(amount));
-        Transfer t = new Transfer(String.valueOf(transferId), amount.negate(), sourceAccount, targetAccount);
+        Transfer t = new Transfer(null, amount.negate(), sourceAccount, targetAccount);
         t.setTransferDate(new Date());
-        transferId++;
+        //transferId++;
         em.persist(t);
         System.out.println("TRANSFER");
         return createAccountDetail(sourceAccount);

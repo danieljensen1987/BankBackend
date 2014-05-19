@@ -11,8 +11,8 @@ drop table Postal;
 drop sequence account_number_seq restrict;
 drop sequence transfer_id_seq restrict;
 -----------------------------------
-create sequence account_number_seq as int start with 1000 increment by 1;
-create sequence transfer_id_seq as int start with 1000 increment by 1;
+create sequence account_number_seq as int start with 11110150 increment by 1;
+create sequence transfer_id_seq as int start with 1100 increment by 1;
 
 create table Postal(
 code int primary key,
